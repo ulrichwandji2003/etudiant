@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Classe{% endblock %}
+
+{% block content %}
+
+<style>
+    .movies {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .movie {
+        background-color: rgb(254, 254, 254);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: auto;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+
+    /* .movie-info h3 {
+        margin: 0;
+        font-size: 18px;
+    } */
+
+    /* .movie-info p {
+        margin: 5px 0 0;
+        font-size: 14px;
+    } */
+
+    /* .niff {
+        display: flex;
+        gap: 25px;
+    } */
+
+    .review {
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .review-header h3 {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .stars {
+        font-size: 18px;
+        color: #FFD700;
+        /* Couleur des étoiles */
+    }
+
+    .review-text {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.5;
+    }
+</style>
+
+<div class="movies">
+
+    {% for n in n %}
+    <div class="review" onclick="window.location.href='{% url 'notecc' n.pk %}'">
+        <div class="review-header">
+            <h3>{{n.niveau}}</h3>
+            <div class="stars" >
+                {{n.nom_classe}} ⭐⭐⭐⭐⭐
+            </div>
+        </div>
+        <p class="review-text" >
+            ✍🏽✍🏽   {{n.description}}
+        </p>
+    </div>
+    {% endfor %}.
+
+</div>
+
+{% endblock %}

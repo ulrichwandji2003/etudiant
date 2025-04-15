@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Insertion des Notes{% endblock %}
+
+{% block content %}
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+
+    .table {
+        width: 1120px;
+        height: 100px;
+    }
+
+    input {
+        border: none;
+        outline: none;
+    }
+    textarea{
+
+        border: none;
+        outline: none;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Mes séries de notes (Macon - Troisième Trimestre)</h5>
+        </div>
+        <div class="card-body">
+            <!-- Barre de recherche et dropdown -->
+            <!-- Tableau des notes -->
+            <div class="table-container">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Matricule</th>
+                            <th>Nom et Prenom</th>
+                            <th>Classe</th>
+                            <th>Credit</th>
+                            <th>Note/20</th>
+                            <th>Type de note</th>
+                            <th>Commentaires</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Exemple de données -->
+
+                        {% for etudiant in etudiant %}
+                        <tr>
+                            <td>{{etudiant.matricule}}</td>
+                            <td>{{etudiant.nom}} {{etudiant.prenom}}</td>
+                            <td>{{etudiant.nom_classe}}</td>
+                            <td>{{etudiant.classe}}</td>
+                            <td><input type="number"></td>
+                            <td>numeric</td>
+                            <td><textarea name="" id=""></textarea></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lien vers Bootstrap JS -->
+
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %} dashbord {% endblock %}
+
+{% block content %}
+
+<div class="cardBox">
+
+    <div class="card" onclick="window.location.href='{% url 'classe' %}'">
+        <div>
+            <div class="numbers">CC</div>
+            <div class="cardName">Saisir des Notes</div>
+        </div>
+        <div class="iconBx">
+            <span class="icon fas fa-book"></span>
+        </div>
+    </div>
+
+
+
+    <div class="card" onclick="window.location.href='{}'">
+        <div>
+            <div class="numbers">SN</div>
+            <div class="cardName">Saisir des Notes</div>
+        </div>
+        <div class="iconBx">
+            <span class="icon fas fa-clipboard-list"></span>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div>
+            <div class="numbers">Moyenn</div>
+            <div class="cardName">Afficharge </div>
+        </div>
+        <div class="iconBx">
+            <span class="icon fas fa-balance-scale"></span>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div>
+            <div class="numbers">Bulletin</div>
+            <div class="cardName">cosultation</div>
+        </div>
+        <div class="iconBx">
+            <span class="icon fas fa-file-alt"></span>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- troisieme partie les detail -->
+<div class="details">
+
+    <div class="recentOrders">
+
+        <div class="cardHeader">
+
+            <h2>Recent Orders</h2>
+            <a href="#" class="btn">view All</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>Payment</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Star Refrigerator</td>
+                    <td>§12000</td>
+                    <td>Paid</td>
+                    <td><span class="status delivered">Delivered</span></td>
+                </tr>
+
+                <tr>
+                    <td>Dell laptop</td>
+                    <td>§8000</td>
+                    <td>Due</td>
+                    <td><span class="status pending">Pending</span></td>
+                </tr>
+
+                <tr>
+                    <td>Television</td>
+                    <td>§7000</td>
+                    <td>Paid</td>
+                    <td><span class="status return">Return</span></td>
+                </tr>
+
+                <tr>
+                    <td>Addidas Shoes</td>
+                    <td>§1200</td>
+                    <td>Dues</td>
+                    <td><span class="status inProgress">In Progress</span></td>
+                </tr>
+
+                <tr>
+                    <td>Star Refrigerator</td>
+                    <td>§12000</td>
+                    <td>Paid</td>
+                    <td><span class="status delivered">Delivered</span></td>
+                </tr>
+
+                <tr>
+                    <td>Dell laptop</td>
+                    <td>§8000</td>
+                    <td>Due</td>
+                    <td><span class="status pending">Pending</span></td>
+                </tr>
+
+                <tr>
+                    <td>Television</td>
+                    <td>§7000</td>
+                    <td>Paid</td>
+                    <td><span class="status return">Return</span></td>
+                </tr>
+
+                <tr>
+                    <td>Addidas Shoes</td>
+                    <td>§1200</td>
+                    <td>Dues</td>
+                    <td><span class="status inProgress">In Progress</span></td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+

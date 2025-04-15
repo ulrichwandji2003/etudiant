@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% block title %}Etudiant{% endblock %}
+
+{% block content %}
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+    }
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f4f4f4;
+    }
+
+    button {
+        padding: 8px 12px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+    }
+
+    .add-row-btn {
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        margin-left: 85%;
+    }
+
+    input {
+        border: none;
+        outline: none;
+    }
+
+    select {
+        border: none;
+        outline: none;
+    }
+</style>
+
+<h1>Formulaire d'inscription des enseignants</h1>
+
+<button type="button" class="add-row-btn" onclick="ajouterLigne()">Ajouter une ligne</button><br><br>
+
+<form id="etudiantForm">
+    <table id="etudiantTable" class="etudiantTable">
+        <thead>
+            <tr>
+                <th>Nom et Prénom</th>
+                <th>Nom d'utilisateur</th>
+                <th>Genre</th>
+                <th>Mot de passe</th>
+                <th>Date de naissance</th>
+                <th>Matricule</th>
+                <th>Tel</th>
+                <th>Email</th>
+                <th>Matière</th>
+                <th>Niveau</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" name="nom_prenom[]" required></td>
+                <td><input type="text" name="utilisateur[]"></td>
+                <td>
+                    <select name="genre[]" id="">
+                        <option value="">M</option>
+                        <option value="">F</option>
+                    </select>
+                </td>
+                <td><input type="password" name="password[]" required></td>
+                <td><input type="date" name="date_naiss[]" required></td>
+                <td><input type="text" name="matricule[]" required></td>
+                <td><input type="text" name="tel[]" required></td>
+                <td><input type="email" name="email[]" required></td>
+                <td><input type="text" name="matiere[]" required></td>
+                <td><select id="niveau" name="niveau[]" required>
+                        <option value="">-- Sélectionnez un niveau --</option>
+                        <option value="Niveau-1">Niveau-1</option>
+                        <option value="Niveau-2">Niveau-2</option>
+                        <option value="Niveau-3">Niveau-3</option>
+                        <option value="Niveau-4">Niveau-4</option>
+                        <option value="Niveau-5">Niveau-5</option>
+                        <option value="Niveau-6">Niveau-6</option>
+                    </select></td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <button type="submit" class="submit-btn">Envoyer</button>
+</form>
+
+<script>
+    function ajouterLigne() {
+        const tableBody = document.querySelector("#etudiantTable tbody");
+        const newRow = document.createElement("tr");
+
+        newRow.innerHTML = `
+        <td><input type="text" name="nom_prenom[]" required></td>
+                <td><input type="text" name="utilisateur[]"></td>
+                <td>
+                    <select name="genre[]" id="">
+                        <option value="">M</option>
+                        <option value="">F</option>
+                    </select>
+                </td>
+                <td><input type="password" name="password[]" required></td>
+                <td><input type="date" name="date_naiss[]" required></td>
+                <td><input type="text" name="matricule[]" required></td>
+                <td><input type="text" name="tel[]" required></td>
+                <td><input type="email" name="email[]" required></td>
+                <td><input type="text" name="matiere[]" required></td>
+                <td><select id="niveau" name="niveau[]" required>
+                        <option value="">-- Sélectionnez un niveau --</option>
+                        <option value="Niveau-1">Niveau-1</option>
+                        <option value="Niveau-2">Niveau-2</option>
+                        <option value="Niveau-3">Niveau-3</option>
+                        <option value="Niveau-4">Niveau-4</option>
+                        <option value="Niveau-5">Niveau-5</option>
+                        <option value="Niveau-6">Niveau-6</option>
+                    </select></td>
+      `;
+
+        tableBody.appendChild(newRow);
+    }
+
+    document.getElementById("etudiantForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const etudiants = [];
+
+        const nom_prenoms = formData.getAll("nom_prenom[]");
+        const utilisateurs = formData.getAll("utilisateur[]");
+        const genres = formData.getAll("genre[]");
+        const passwords = formData.getAll("password[]");
+        const date_naiss = formData.getAll("date_naiss[]");
+        const matricules = formData.getAll("matricule[]");
+        const tels = formData.getAll("tel[]");
+        const emails = formData.getAll("email[]");
+        const matieres = formData.getAll("matiere[]");
+        const niveaus = formData.getAll("niveau[]");
+
+
+        for (let i = 0; i < nom_prenoms.length; i++) {
+            etudiants.push({
+                nom_prenom: nom_prenoms[i],
+                utilisateur: utilisateurs[i],
+                genre: genres[i],
+                password: passwords[i],
+                date_naiss: date_naisss[i],
+                matricule: matricules[i],
+                tel: tels[i],
+                email: emails[i],
+                matiere: matieres[i],
+                niveau: niveaus[i]
+
+
+            });
+        }
+
+        fetch('/enregistrer-etudiants/', {
+            method: 'POST',
+            headers: { 'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value },
+            body: new URLSearchParams(formData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                } else {
+                    alert('Erreur lors de l\'enregistrement');
+                }
+            })
+            .catch(error => console.error('Erreur:', error));
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Insertion des Notes{% endblock %}
+
+{% block content %}
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+
+    .table {
+        width: 1120px;
+        height: 100px;
+    }
+
+    input {
+        border: none;
+        outline: none;
+    }
+    textarea{
+
+        border: none;
+        outline: none;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Mes séries de notes (Macon - Troisième Trimestre)</h5>
+        </div>
+        <div class="card-body">
+            <!-- Barre de recherche et dropdown -->
+            <!-- Tableau des notes -->
+            <div class="table-container">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Matricule</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Date naiss</th>
+                            <th>Lieu Naiss</th>
+                            <th>Genre</th>
+                            <th>Classe</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Exemple de données -->
+
+                        {% for n in n %}
+                        <tr>
+                            <td>{{n.matricule}}</td>
+                            <td>{{n.nom}}</td>
+                            <td>{{n.prenom}}</td>
+                            <td>{{n.date_naissance}}</td>
+                            <td>{{n.lieu_naissance}}</td>
+                            <td>{{n.genre}}</td>
+                            <td>{{n.classe}}</td>
+                            <td class="action-links"><a href="#" class="text-primary"><i class="fas fa-edit"></i>
+                                    Modifier</a></td>
+                            <td class="action-links"><a href="#" class="text-danger"><i class="fas fa-trash"></i>
+                                    Supprimer</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lien vers Bootstrap JS -->
+
+{% endblock %}

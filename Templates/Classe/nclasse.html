@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Etudiant{% endblock %}
+
+{% block content %}
+
+
+<style>
+    .form-container {
+        margin-left: 30%;
+        margin-top: 5%;
+        background: #fff;
+        padding: 20px 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+    .form-container h2 {
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+    .form-group input, .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    .form-group input:focus, .form-group select:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+    .form-group button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .form-group button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="form-container">
+    <h2>Enregistrement d'une Classe</h2>
+    <form action="/submit_classe" method="POST">
+        <div class="form-group">
+            <label for="nom_classe">Nom de la Classe</label>
+            <input type="text" id="nom_classe" name="nom_classe" placeholder="Ex: LPGL" required>
+        </div>
+        <div class="form-group">
+            <label for="niveau">Niveau</label>
+            <select id="niveau" name="niveau" required>
+                <option value="">-- Sélectionnez un niveau --</option>
+                <option value="Niveau-1">Niveau-1</option>
+                <option value="Niveau-2">Niveau-2</option>
+                <option value="Niveau-3">Niveau-3</option>
+                <option value="Niveau-4">Niveau-4</option>
+                <option value="Niveau-5">Niveau-5</option>
+                <option value="Niveau-6">Niveau-6</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nom_classe">Nom de la Classe</label>
+            <textarea name="description" id="" required></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit">Enregistrer</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}Etudiant{% endblock %}
+
+{% block content %}
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+    }
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f4f4f4;
+    }
+
+    button {
+        padding: 8px 12px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+    }
+
+    .add-row-btn {
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        margin-left: 85%;
+    }
+
+    input {
+        border: none;
+        outline: none;
+    }
+
+    select {
+        border: none;
+        outline: none;
+    }
+</style>
+
+<h1>Formulaire d'inscription des etudiants</h1>
+
+<button type="button" class="add-row-btn" onclick="ajouterLigne()">Ajouter une ligne</button><br><br>
+
+<form id="etudiantForm">
+    <table id="etudiantTable">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Ne(e) le</th>
+                <th>Lieu de naissance</th>
+                <th>Genre</th>
+                <th>Classe</th>
+                <th>Matricule</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" name="nom[]" required></td>
+                <td><input type="text" name="prenom[]"></td>
+                <td><input type="date" name="date[]" required></td>
+                <td><input type="text" name="lieu[]" required></td>
+                <td>
+                    <select name="genre[]" id="">
+                        <option value="">M</option>
+                        <option value="">F</option>
+                    </select>
+                </td>
+                <td><input type="text" name="classe[]" required></td>
+                <td><input type="text" name="matricule[]" required></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <button type="submit" class="submit-btn">Envoyer</button>
+</form>
+
+<script>
+    function ajouterLigne() {
+        const tableBody = document.querySelector("#etudiantTable tbody");
+        const newRow = document.createElement("tr");
+
+        newRow.innerHTML = `
+        <td><input type="text" name="nom[]" required></td>
+                    <td><input type="text" name="prenom[]"></td>
+                    <td><input type="date" name="date[]" required></td>
+                    <td><input type="text" name="lieu[]" required></td>
+                    <td>
+                        <select name="genre[]" id="">
+                            <option value="">M</option>
+                            <option value="">F</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="classe[]" required></td>
+                    <td><input type="text" name="matricule[]" required></td>
+      `;
+
+        tableBody.appendChild(newRow);
+    }
+
+    document.getElementById("etudiantForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const etudiants = [];
+
+        const noms = formData.getAll("nom[]");
+        const prenoms = formData.getAll("prenom[]");
+        const dates = formData.getAll("date[]");
+        const lieus = formData.getAll("lieu[]");
+        const genres = formData.getAll("genre[]");
+        const classes = formData.getAll("classe[]");
+        const matricules = formData.getAll("matricule[]");
+
+        for (let i = 0; i < noms.length; i++) {
+            etudiants.push({
+                nom: noms[i],
+                prenom: prenoms[i],
+                date: dates[i],
+                lieu: lieus[i],
+                genre: genres[i],
+                classe: classes[i],
+                matricule: matricules[i]
+            });
+        }
+
+        fetch('/enregistrer-etudiants/', {
+            method: 'POST',
+            headers: { 'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value },
+            body: new URLSearchParams(formData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                } else {
+                    alert('Erreur lors de l\'enregistrement');
+                }
+            })
+            .catch(error => console.error('Erreur:', error));
+    });
+</script>
+
+{% endblock %}

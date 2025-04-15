@@ -1,0 +1,200 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}"> -->
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'jquery-3.7.0.min.js' %}"></script>
+    <script src="{% static 'script.js' %}"></script>
+    <title>Responsive admin dashbord</title>
+</head>
+
+<style>
+    .sup {
+        position: relative;
+        margin: 20px;
+        padding: 5px;
+    }
+
+    .sup a {
+        text-decoration: none;
+        color: black;
+    }
+
+
+    .sup a .icon {
+        width: 35px;
+    }
+
+    .sup:hover {
+        background: rgb(205, 202, 202);
+        border-radius: 35px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+</style>
+
+<body>
+
+    <div class="containers">
+
+        <div class="navigations">
+
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="titre">
+                            <h1>GB</h1>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'dashboard' %}">
+                        <span class="icon fas fa-home"></span>
+                        <span class="titre">Accueil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'netudiant' %}">
+                        <span class="icon fas fa-file-signature"></span>
+                        <span class="titre">Etudiant</span>
+                    </a>
+                </li>
+                 <li>
+                    <a href="{% url 'inscription' %}">
+                        <span class="icon fas fa-file-signature"></span>
+                        <span class="titre">Edite etudiant</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'inscription_prof' %}">
+                        <span class="icon fas fa-user"></span>
+                        <span class="titre">Edite enseignant</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon fas fa-user-cog"></span>
+                        <span class="titre">Utilisateur</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'nclasse' %}">
+                        <span class="icon fas fa-user-cog"></span>
+                        <span class="titre">Classe</span>
+                    </a>
+                </li><br><br>
+                <li>
+                    <a href="#">
+                        <span class="icon fas fa-power-off"></span>
+                        <span class="titre" style="color: red;">Déconnexion</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="main">
+
+            <div class="topbar">
+
+                <div class="toggle">
+                    <span class="fas fa-bars"></span>
+                </div>
+
+                <div class="search">
+                    <label for="">
+                        <input type="text" placeholder="search bare" class="search">
+                        <span class="fas fa-search"></span>
+                    </label>
+                </div>
+                <div class="user">
+                    <img src="{% static 'photo_2024-06-16_01-44-08.jpg' %}" alt="">
+                </div>
+            </div>
+
+            <div style="height: calc(100vh - 60px);overflow-y: auto;padding: 20px;box-sizing: border-box;">
+
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    {% block content %}
+
+                    {% endblock %}
+
+                </form>
+
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+    <form action="" method="get">
+
+
+
+        <div class="profil">
+
+            <div class="image" style="text-align: center;position: relative;">
+                <img class="img" src="" alt="">
+
+            </div>
+            <div class="nom">
+                <span></span>
+            </div>
+
+            <div class="email" style="text-align: center;overflow: hidden;word-wrap: break-word;padding: 10px;">
+                <label for="" style="position: relative;"></label>
+            </div>
+            <hr>
+
+
+
+
+    </form>
+
+
+
+    <script>
+
+        // alert("hello world!");
+
+        let list = document.querySelectorAll(".navigations li");
+
+        function activeLink() {
+            list.forEach((iten) => {
+                item.classList.remove("hovered");
+            })
+            this.classList.add("hovered");
+        }
+
+        list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+        // menu toggle
+        let toggle = document.querySelector(".toggle");
+        let navigation = document.querySelector(".navigations");
+        let main = document.querySelector(".main");
+
+        toggle.onclick = function () {
+            navigation.classList.toggle("active");
+            main.classList.toggle("active");
+        };
+
+
+    </script>
+
+</body>
+
+</html>

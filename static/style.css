@@ -1,0 +1,386 @@
+* {
+    font-family: "ubuntu", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.image {
+    margin-top: 5px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.image img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+}
+
+.nom {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    text-align: center;
+}
+
+.profil {
+    width: 300px;
+    height: 350px;
+    position: absolute;
+    background-color: rgb(144, 153, 143) !important;
+    margin-left: 77%;
+    top: 52px;
+    border-radius: 25px 25px 25px 25px;
+    padding: 0;
+    overflow: hidden;
+    display: none;
+}
+
+/* .sup {
+    position: relative;
+    margin: 20px;
+    padding: 5px;
+}
+
+.sup a{
+    text-decoration: none;
+    color: black;
+}
+
+
+.sup a .icon {
+width: 35px;
+} */
+
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.containers {
+    position: relative;
+    width: 100%;
+}
+
+.navigations {
+    position: fixed;
+    width: 200px;
+    /* /////////////////////////////// */
+    height: 100%;
+    background-color: rgb(15, 15, 15);
+    overflow: hidden;
+}
+
+/* permet de reduire la navigations en conservant l'effet du style css */
+.navigations.active {
+    width: 60px;
+}
+
+.navigations ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navigations ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.navigations ul li:hover,
+.navigations ul li.hovered {
+    background-color: white;
+}
+
+.navigations ul li:nth-child(1) {
+    margin-bottom: 40px;
+    pointer-events: none;
+}
+
+.navigations ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: white;
+}
+
+.navigations ul li:hover a,
+.navigations ul li.hovered a {
+    color: rgb(27, 27, 27);
+}
+
+.navigations ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.navigations ul li a .titre {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+.navigations ul li:hover a::before,
+.navigations ul li.hovered a::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px white;
+    pointer-events: none;
+}
+
+.navigations ul li:hover a::after,
+.navigations ul li.hovered a::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px white;
+    pointer-events: none;
+}
+
+.main {
+    position: absolute;
+    width: calc(100% - 200px);
+    left: 200px;
+    min-height: 100vh;
+    background-color: white;
+    transition: 0.5s;
+}
+
+/* pour que le toggle ce deplace avec les lien dashboard */
+.main.active {
+    width: calc(100% - 60px);
+    left: 60px;
+}
+
+.topbar {
+    /* position: fixed;
+    background-color: #767676; */
+    /* z-index: 1000; */
+   
+
+
+
+
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.search {
+    position: relative;
+    width: 400px;
+    margin: 0 10px;
+}
+
+.search label {
+    position: relative;
+    width: 100%;
+}
+
+.search label input {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 40px;
+    outline: none;
+    border: 1px solid blue;
+}
+
+.search label span {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    font-size: 1.2rem;
+}
+
+.user {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.user img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+}
+
+/* troisieme partie cardBox */
+
+    .cardBox {
+        position: relative;
+        width: 100%;
+        /* background-color: black; */
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 30px;
+    }
+
+    .cardBox .card {
+        position: relative;
+        background: rgb(168, 168, 168);
+        padding: 30px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        box-shadow: 0 7px 25px black;
+    }
+
+    .cardBox .card .numbers {
+        position: relative;
+        font-weight: 500;
+        font-size: 2.5rem;
+        color: rgb(21, 255, 0);
+    }
+
+    .cardBox .card .cardName {
+        color: black;
+        font-size: 1.1rem;
+        margin-top: 5px;
+    }
+
+    .cardBox .card .iconBx {
+        font-size: 3.5rem;
+        color: black;
+    }
+
+    .cardBox .card:hover {
+        background-color: rgb(29, 29, 29);
+    }
+
+    .cardBox .card:hover .numbers,
+    .cardBox .card:hover .cardName,
+    .cardBox .card:hover .iconBx {
+        color: white;
+    }
+
+    .details {
+        position: relative;
+        width: 100%;
+        padding: 20px;
+        display: grid;
+        grid-auto-columns: 2fr 1fr;
+        grid-gap: 30px;
+        /* margin-top: 10px; */
+    }
+
+    .details .recentOrders {
+        position: relative;
+        display: grid;
+        min-height: 500px;
+        background: white;
+        padding: 20px;
+        box-shadow: 0 7px 25px rgb(88, 222, 255);
+        border-radius: 20px;
+    }
+
+    .details .cardHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .cardHeader h2 {
+        font-weight: 600;
+        color: blue;
+    }
+
+    .cardHeader .btn {
+        position: relative;
+        padding: 5px 10px;
+        background: blue;
+        text-decoration: none;
+        color: white;
+        border-radius: 6px;
+    }
+
+    .details table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .details table thead td {
+        font-size: 600;
+    }
+
+    .details .recentOrders table tr {
+        color: black;
+        border-bottom: 1px solid black;
+    }
+
+    .details .recentOrders table tr:last-child {
+        border-bottom: none;
+    }
+
+    .details .recentOrders table tbody tr:hover {
+        background: blue;
+        color: white;
+    }
+
+    .details .recentOrders table tr td {
+        padding: 10px;
+    }
+
+    /* .sup{
+    margin: 200px;
+} */
