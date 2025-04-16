@@ -4,6 +4,175 @@
 
 {% block content %}
 
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* Conteneur général des cartes */
+.cardBox {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à plusieurs lignes si l'espace est insuffisant */
+    justify-content: space-around;
+    margin: 20px;
+}
+
+/* Style des cartes */
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Numéros et noms sur les cartes */
+.numbers {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.cardName {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Icônes des cartes */
+.iconBx .icon {
+    font-size: 30px;
+    color: #007BFF;
+    margin-top: 10px;
+}
+
+/* Style du conteneur détails */
+.details {
+    margin: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style de la table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table thead td {
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    background: #007BFF;
+    color: white;
+}
+
+table tbody tr td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Statut dans la table */
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.status.delivered {
+    background-color: #4CAF50;
+}
+
+.status.pending {
+    background-color: #FFC107;
+}
+
+.status.return {
+    background-color: #F44336;
+}
+
+.status.inProgress {
+    background-color: #2196F3;
+}
+
+/* Bouton vue globale */
+.btn {
+    display: inline-block;
+    background: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+/* **Media Queries** pour rendre responsif */
+@media screen and (max-width: 768px) {
+    .cardBox {
+        flex-direction: column; /* Les cartes s'empilent verticalement */
+        align-items: center;
+    }
+
+    .card {
+        width: 90%; /* Réduit la largeur des cartes sur tablettes et petits écrans */
+    }
+
+    table {
+        font-size: 14px; /* Texte de la table adapté aux petits écrans */
+    }
+
+    .iconBx .icon {
+        font-size: 25px; /* Icônes réduites sur petits écrans */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 14px; /* Texte global réduit sur les téléphones */
+    }
+
+    .cardBox {
+        margin: 10px; /* Réduit les marges sur petits écrans */
+    }
+
+    .card {
+        width: 100%; /* Les cartes occupent toute la largeur */
+        margin: 5px 0; /* Réduit les marges entre les cartes */
+    }
+
+    table {
+        font-size: 12px; /* Taille des textes réduite pour les téléphones */
+    }
+
+    .btn {
+        padding: 8px 10px; /* Bouton réduit sur les petits écrans */
+    }
+
+    .iconBx .icon {
+        font-size: 20px; /* Icônes encore plus petites */
+    }
+}
+</style>
+
 <div class="cardBox">
 
     <div class="card" onclick="window.location.href='{% url 'classe' %}'">
